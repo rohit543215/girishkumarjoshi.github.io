@@ -1,11 +1,1488 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Girish Joshi is the best</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Girish Joshi - Portfolio</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-main: #020617;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-card-soft: rgba(15, 23, 42, 0.6);
+            --border-subtle: rgba(148, 163, 184, 0.25);
+            --accent-blue: #60a5fa;
+            --accent-purple: #a78bfa;
+            --accent-cyan: #22d3ee;
+            --accent-amber: #fbbf24;
+            --text-soft: #94a3b8;
+            --text-main: #e2e8f0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== METEOR BACKGROUND ========== */
+        .stars-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, #60a5fa, #38bdf8, transparent);
+            border-radius: 999px;
+            opacity: 0;
+            animation: meteor-fall linear infinite;
+            top: -100px;
+        }
+
+        .meteor::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -1px;
+            width: 3px;
+            height: 3px;
+            border-radius: 999px;
+            background: radial-gradient(circle, #ffffff, #60a5fa);
+            box-shadow: 0 0 6px #60a5fa, 0 0 12px rgba(96, 165, 250, 0.3);
+        }
+
+        @keyframes meteor-fall {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Generate multiple meteors with random positions and delays */
+        .meteor:nth-child(1) { left: 10%; animation-duration: 3s; animation-delay: 0s; }
+        .meteor:nth-child(2) { left: 20%; animation-duration: 2.5s; animation-delay: 0.3s; }
+        .meteor:nth-child(3) { left: 30%; animation-duration: 3.2s; animation-delay: 0.6s; }
+        .meteor:nth-child(4) { left: 40%; animation-duration: 2.8s; animation-delay: 0.9s; }
+        .meteor:nth-child(5) { left: 50%; animation-duration: 3.5s; animation-delay: 1.2s; }
+        .meteor:nth-child(6) { left: 60%; animation-duration: 2.7s; animation-delay: 1.5s; }
+        .meteor:nth-child(7) { left: 70%; animation-duration: 3.1s; animation-delay: 1.8s; }
+        .meteor:nth-child(8) { left: 80%; animation-duration: 2.9s; animation-delay: 2.1s; }
+        .meteor:nth-child(9) { left: 90%; animation-duration: 3.3s; animation-delay: 2.4s; }
+        .meteor:nth-child(10) { left: 15%; animation-duration: 2.6s; animation-delay: 2.7s; }
+        .meteor:nth-child(11) { left: 25%; animation-duration: 3.4s; animation-delay: 3s; }
+        .meteor:nth-child(12) { left: 35%; animation-duration: 2.4s; animation-delay: 3.3s; }
+        .meteor:nth-child(13) { left: 45%; animation-duration: 3.6s; animation-delay: 3.6s; }
+        .meteor:nth-child(14) { left: 55%; animation-duration: 2.8s; animation-delay: 3.9s; }
+        .meteor:nth-child(15) { left: 65%; animation-duration: 3.2s; animation-delay: 4.2s; }
+        .meteor:nth-child(16) { left: 75%; animation-duration: 2.7s; animation-delay: 4.5s; }
+        .meteor:nth-child(17) { left: 85%; animation-duration: 3.1s; animation-delay: 4.8s; }
+        .meteor:nth-child(18) { left: 95%; animation-duration: 2.9s; animation-delay: 5.1s; }
+        .meteor:nth-child(19) { left: 5%; animation-duration: 3.3s; animation-delay: 5.4s; }
+        .meteor:nth-child(20) { left: 12%; animation-duration: 2.5s; animation-delay: 5.7s; }
+
+        /* ========== HEADER ========== */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(18px);
+            z-index: 1000;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            color: var(--text-soft);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 0.2rem;
+            transition: color 0.25s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            position: relative;
+            padding-top: 5rem;
+        }
+
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .availability-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            width: fit-content;
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.7rem, 5vw, 3.4rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #e5e7eb, #e0f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-title span {
+            color: var(--accent-blue);
+        }
+
+        .hero-subtext {
+            max-width: 650px;
+            color: var(--text-soft);
+            font-size: 0.98rem;
+        }
+
+        .hero-subtext span {
+            color: var(--accent-blue);
+        }
+
+        .hero-subtext .highlight-purple {
+            color: var(--accent-purple);
+        }
+        .hero-subtext .highlight-amber {
+            color: var(--accent-amber);
+        }
+        .hero-subtext .highlight-cyan {
+            color: var(--accent-cyan);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            margin-top: 0.6rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.6rem;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease,
+                border 0.18s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: #f9fafb;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.38);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            color: var(--text-main);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.7);
+        }
+
+        /* ========== GENERIC SECTIONS ========== */
+        .section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 1.9rem;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ========== SKILLS ========== */
+        .skills-wrapper {
+            background: radial-gradient(circle at top left, #0f172a, transparent 60%);
+            border-radius: 18px;
+            padding: 1.8rem 1.6rem 1.9rem;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skill-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.95rem;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            color: #e5e7eb;
+            backdrop-filter: blur(12px);
+            transition: all 0.25s ease;
+        }
+
+        .skill-pill i {
+            font-size: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .skill-pill:hover {
+            border-color: var(--accent-blue);
+            background: rgba(15, 23, 42, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+        }
+
+        /* ========== PROJECTS ========== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.9);
+            border-color: var(--accent-blue);
+        }
+
+        .project-thumbnail {
+            height: 210px;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: var(--accent-blue);
+        }
+
+        .project-content {
+            padding: 1.4rem 1.5rem 1.4rem;
+        }
+
+        .project-title {
+            font-size: 1.15rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-description {
+            font-size: 0.92rem;
+            color: var(--text-soft);
+            margin-bottom: 0.9rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.9rem;
+            font-size: 0.86rem;
+        }
+
+        .project-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .project-links a:hover {
+            color: #93c5fd;
+        }
+
+        /* ========== EXPERIENCE ========== */
+        .experience-wrapper {
+            position: relative;
+            margin-top: 1.5rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            transform: translateX(-50%);
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
+        }
+
+        .experience-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .experience-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .experience-card {
+            width: 47%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.6rem 1.7rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .experience-dot {
+            position: absolute;
+            top: 1.9rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: #38bdf8;
+            box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.25);
+        }
+
+        .company-name {
+            font-size: 1.08rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-title {
+            font-size: 0.95rem;
+            color: #e5e7eb;
+            margin-bottom: 0.2rem;
+        }
+
+        .job-duration {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            margin-bottom: 0.7rem;
+        }
+
+        .job-duration i {
+            margin-right: 0.4rem;
+            color: var(--accent-blue);
+        }
+
+        .experience-card p {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+        }
+
+        /* ========== GITHUB / LEETCODE STATS ========== */
+        .stats-section-title {
+            font-size: 1.6rem;
+            margin-top: 1rem;
+        }
+
+        .github-stats {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .github-stats img {
+            border-radius: 16px;
+            margin: 0.7rem;
+            max-width: 100%;
+        }
+
+        /* Custom GitHub Contribution Graph */
+        .contribution-graph {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 auto;
+            max-width: 900px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #24292f;
+            border: 1px solid #d1d9e0;
+        }
+
+        .contribution-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .contribution-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: #24292f;
+        }
+
+        .contribution-settings {
+            font-size: 12px;
+            color: #656d76;
+            cursor: pointer;
+        }
+
+        .contribution-calendar {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .month-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-left: 40px;
+        }
+
+        .month-labels span {
+            font-size: 12px;
+            color: #656d76;
+            flex: 1;
+            text-align: left;
+        }
+
+        .day-labels {
+            position: absolute;
+            left: 0;
+            top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .day-labels span {
+            font-size: 12px;
+            color: #656d76;
+            height: 11px;
+            line-height: 11px;
+        }
+
+        .contribution-grid {
+            display: flex;
+            gap: 3px;
+            margin-left: 40px;
+            overflow-x: auto;
+        }
+
+        .week {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .day {
+            width: 11px;
+            height: 11px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        /* GitHub Contribution Graph Colors – 2025 palette */
+        /* Empty / no contributions */
+        .day.level-0 {
+            background-color: #ebedf0;  /* light gray */
+        }
+
+        /* 1–3 contributions */
+        .day.level-1 {
+            background-color: #c6e48b;  /* very light green */
+        }
+
+        /* 4–7 contributions */
+        .day.level-2 {
+            background-color: #7bc96f;  /* light green */
+        }
+
+        /* 8–11 contributions */
+        .day.level-3 {
+            background-color: #239a3b;  /* medium green */
+        }
+
+        /* 12+ contributions */
+        .day.level-4 {
+            background-color: #196127;  /* dark green */
+        }
+
+        .contribution-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #656d76;
+        }
+
+        .learn-link {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .contribution-legend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-squares {
+            display: flex;
+            gap: 2px;
+            margin: 0 4px;
+        }
+
+        /* Legend squares (same colors) */
+        .legend-square {
+            width: 11px;
+            height: 11px;
+            border-radius: 2px;
+        }
+
+        .legend-square.level-0 {
+            background-color: #ebedf0;
+        }
+
+        .legend-square.level-1 {
+            background-color: #c6e48b;
+        }
+
+        .legend-square.level-2 {
+            background-color: #7bc96f;
+        }
+
+        .legend-square.level-3 {
+            background-color: #239a3b;
+        }
+
+        .legend-square.level-4 {
+            background-color: #196127;
+        }
+
+        .copy-icon {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.4rem;
+            margin-top: 1.2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.6rem 1.5rem;
+            border: 1px solid var(--border-subtle);
+            font-size: 0.95rem;
+            color: var(--text-soft);
+        }
+
+        .stat-card h3 {
+            color: var(--accent-blue);
+            margin-bottom: 0.6rem;
+            font-size: 0.98rem;
+        }
+
+        /* ========== FOOTER / CONTACT ========== */
+        .footer {
+            background: rgba(2, 6, 23, 0.96);
+            border-top: 1px solid rgba(15, 23, 42, 0.9);
+            padding: 2.5rem 0 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.3rem;
+        }
+
+        .social-links a {
+            color: var(--text-soft);
+            font-size: 1.35rem;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            color: var(--text-soft);
+            font-size: 0.85rem;
+        }
+
+        /* ========== RESUME MODAL ========== */
+        .resume-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .resume-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resume-container {
+            position: relative;
+            width: 95%;
+            max-width: 800px;
+            height: 95%;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            background: var(--bg-main);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .resume-title {
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .resume-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .resume-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .resume-btn.download {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .resume-btn.download:hover {
+            background: #3b82f6;
+        }
+
+        .resume-btn.close {
+            background: rgba(148, 163, 184, 0.2);
+            color: var(--text-main);
+        }
+
+        .resume-btn.close:hover {
+            background: rgba(148, 163, 184, 0.3);
+        }
+
+        .resume-viewer {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+            background: #f8f9fa;
+        }
+
+        .resume-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: calc(100% - 60px);
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .resume-loading.hidden {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                text-align: left;
+            }
+
+            .experience-wrapper .timeline-line {
+                left: 24px;
+            }
+
+            .experience-item {
+                flex-direction: column !important;
+            }
+
+            .experience-card {
+                width: 100%;
+                margin-left: 40px;
+            }
+
+            .experience-dot {
+                left: 24px;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello 👋 I’m Girish</h1>
-  <p>Data Science & AI Student</p>
-  <p>Welcome to my personal website</p>
+    <!-- Meteors layer -->
+    <div class="stars-layer">
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+        <div class="meteor"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo"></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-inner">
+            <div class="availability-badge floating">
+                <i class="fas fa-circle" style="color: #22c55e; margin-right: 0.5rem;"></i>
+                Available For Work
+            </div>
+            <h1 class="hero-title">
+                I'm <span>Girish Joshi</span>! 👋
+            </h1>
+
+            <p class="hero-subtext">
+                AI/ML Engineer, Data Scientist, and GenAI Developer specializing in
+                <span>generative AI</span>, <span>multi‑agent systems</span>, and
+                <span>data‑driven solutions</span>.
+            </p>
+            <p class="hero-subtext">
+                Experienced in building intelligent applications with
+                <span class="highlight-purple">GPT‑4</span>, <span>PyTorch</span>, and
+                <span class="highlight-cyan">LangChain</span>, automating complex workflows
+                and delivering actionable insights.
+            </p>
+            <p class="hero-subtext">
+                Currently pursuing a B.E. in Artificial Intelligence &amp; Data Science at
+                ZEAL College of Engineering and Research, graduating in May 2026.
+            </p>
+
+            <div class="cta-buttons">
+                <button onclick="openResumeModal()" class="btn btn-secondary">
+                    Resume
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-wrapper">
+                <div class="skills-grid">
+                    <!-- Programming -->
+                    <div class="skill-pill">
+                        <i class="fab fa-python"></i> Python
+                    </div>
+
+                    <!-- Data Science Libraries -->
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-table"></i> Pandas
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-square-root-variable"></i> NumPy
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-brain"></i> Scikit-learn
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-brain"></i> PyTorch
+                    </div>
+
+                    <!-- Analysis & Visualization -->
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-chart-simple"></i> Statistical Analysis
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-chart-pie"></i> Data Visualization
+                    </div>
+
+                    <!-- Database -->
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-database"></i> SQL (MySQL)
+                    </div>
+
+                    <!-- Tools & Technologies -->
+                    <div class="skill-pill">
+                        <i class="fab fa-git-alt"></i> Git
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-plug"></i> REST APIs
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-book"></i> Jupyter Notebook
+                    </div>
+
+                    <!-- AI/ML -->
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-robot"></i> HuggingFace Transformers
+                    </div>
+                    <div class="skill-pill">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Prompt Engineering
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+
+            <p style="color: var(--text-soft); max-width: 720px; margin-bottom: 1.7rem;">
+                Here are some of my key projects focused on generative AI, multi‑agent
+                systems, and applied data science. You can explore more work on my
+                <a href="https://github.com/rohit543215" style="color: var(--accent-blue);"
+                    >GitHub profile</a
+                >.
+            </p>
+
+            <div class="projects-grid">
+                <!-- AI Drug Discovery -->
+                <article class="project-card">
+                    <div class="project-thumbnail">
+                        <i class="fas fa-vials"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            AI Drug Discovery System – Multi‑Agent Research Platform
+                        </h3>
+                        <p class="project-description">
+                            Autonomous drug discovery platform built with GPT‑4‑powered
+                            multi‑agent architecture (Coordinator, Biology, Chemistry
+                            agents) to automate target identification and compound
+                            screening workflows.
+                        </p>
+                        <p class="project-description">
+                            Integrated Open Targets and ChEMBL via REST APIs to analyze
+                            2M+ bioactive compounds, achieving 85%+ ADMET prediction
+                            accuracy using PyTorch models and RDKit‑based molecular
+                            analysis pipelines.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">GPT‑4 API</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">RDKit</span>
+                            <span class="tech-tag">REST APIs</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="YOUR_DRUG_DISCOVERY_GITHUB_LINK" target="_blank"
+                                ><i class="fab fa-github"></i> GitHub</a
+                            >
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Know Your Rights -->
+                <article class="project-card">
+                    <div class="project-thumbnail">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">
+                            Know Your Rights – Legal Awareness Platform
+                        </h3>
+                        <p class="project-description">
+                            Digital platform to democratize legal knowledge with simplified
+                            explanations of fundamental rights, consumer laws, and digital
+                            rights.
+                        </p>
+                        <p class="project-description">
+                            Designed categorized rights sections and a searchable FAQ system
+                            to make legal information accessible to non‑legal users,
+                            cutting query resolution time from 30 minutes to under
+                            2 minutes.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="YOUR_KYR_GITHUB_LINK" target="_blank"
+                                ><i class="fab fa-github"></i> GitHub</a
+                            >
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div style="margin-top: 2.3rem; color: var(--text-soft);">
+                Want to see more of my work?
+                <a href="https://github.com/rohit543215" style="color: var(--accent-blue);"
+                    >Visit my GitHub profile</a
+                >.
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-wrapper">
+                <div class="timeline-line"></div>
+
+                <!-- Ozibook -->
+                <div class="experience-item">
+                    <article class="experience-card">
+                        <div class="company-name">Ozibook – EdTech Platform</div>
+                        <div class="job-title">Data Analyst Intern</div>
+                        <div class="job-duration">
+                            <i class="fas fa-calendar"></i> Jun 2024 – Aug 2024 · Pune, India
+                        </div>
+                        <p>
+                            Conducted competitive analysis and market research for an EdTech
+                            platform targeting coaches and educators, identifying key market
+                            gaps that informed product strategy.
+                        </p>
+                        <p style="margin-top:0.4rem;">
+                            Automated LinkedIn data scraping using Python (BeautifulSoup,
+                            Selenium) and built dashboards with Matplotlib and Seaborn to
+                            visualize user engagement and skill trends.
+                        </p>
+                    </article>
+                    <div class="experience-dot"></div>
+                </div>
+
+                <!-- Pustakwale -->
+                <div class="experience-item">
+                    <article class="experience-card">
+                        <div class="company-name">Pustakwale – Book Retail</div>
+                        <div class="job-title">Sales &amp; Inventory Intern</div>
+                        <div class="job-duration">
+                            <i class="fas fa-calendar"></i> Jan 2023 – Dec 2023 · Pune, India
+                        </div>
+                        <p>
+                            Managed inventory tracking and sales analytics for SKUs,
+                            identifying top‑performing categories and optimizing stock
+                            levels to reduce waste.
+                        </p>
+                        <p style="margin-top:0.4rem;">
+                            Analyzed customer purchasing patterns and developed strong
+                            communication and negotiation skills in a fast‑paced retail
+                            environment.
+                        </p>
+                    </article>
+                    <div class="experience-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub & LeetCode Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">GitHub Contribution</h2>
+            
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <h3 style="color: var(--text-main); font-size: 1.2rem; margin-bottom: 0.5rem;">
+                    189 contributions in 2025
+                </h3>
+                <p style="color: var(--text-soft); font-size: 0.9rem;">
+                    Active in coding and open-source contributions across multiple projects
+                </p>
+            </div>
+
+            <div class="github-stats">
+                <!-- Custom GitHub Contribution Graph -->
+                <div class="contribution-graph">
+                    <div class="contribution-header">
+                        <span class="contribution-count">189 contributions in 2025</span>
+                        <span class="contribution-settings">Contribution settings ▼</span>
+                    </div>
+                    
+                    <div class="contribution-calendar">
+                        <!-- Month labels -->
+                        <div class="month-labels">
+                            <span>Jan</span>
+                            <span>Feb</span>
+                            <span>Mar</span>
+                            <span>Apr</span>
+                            <span>May</span>
+                            <span>Jun</span>
+                            <span>Jul</span>
+                            <span>Aug</span>
+                            <span>Sep</span>
+                            <span>Oct</span>
+                            <span>Nov</span>
+                            <span>Dec</span>
+                        </div>
+                        
+                        <!-- Day labels -->
+                        <div class="day-labels">
+                            <span>Mon</span>
+                            <span>Wed</span>
+                            <span>Fri</span>
+                        </div>
+                        
+                        <!-- Contribution grid -->
+                        <div class="contribution-grid" id="contributionGrid">
+                            <!-- Grid will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="contribution-footer">
+                        <span class="learn-link">Learn how we count contributions</span>
+                        <div class="contribution-legend">
+                            <span>Less</span>
+                            <div class="legend-squares">
+                                <div class="legend-square level-0"></div>
+                                <div class="legend-square level-1"></div>
+                                <div class="legend-square level-2"></div>
+                                <div class="legend-square level-3"></div>
+                                <div class="legend-square level-4"></div>
+                            </div>
+                            <span>More</span>
+                            <div class="copy-icon">📋</div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/rohit543215" target="_blank"
+                    ><i class="fab fa-github"></i
+                ></a>
+                <a href="https://www.linkedin.com/in/girish-joshi-539b94262/" target="_blank"
+                    ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="mailto:gj2615059@gmail.com"
+                    ><i class="fas fa-envelope"></i
+                ></a>
+                <a href="https://girishkumarjoshi.me" target="_blank"
+                    ><i class="fas fa-link"></i
+                ></a>
+            </div>
+            <p>© 2025 Girish Joshi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="resume-modal">
+        <div class="resume-container">
+            <div class="resume-header">
+                <div class="resume-title">
+                    <i class="fas fa-file-pdf"></i> Resume - Girish Joshi
+                </div>
+                <div class="resume-controls">
+                    <button onclick="downloadResume()" class="resume-btn download">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button onclick="closeResumeModal()" class="resume-btn close">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+            <div id="resumeLoading" class="resume-loading">
+                <i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>
+                Loading resume...
+            </div>
+            <iframe 
+                id="resumeViewer" 
+                class="resume-viewer"
+                style="display: none;"
+                title="Resume PDF Viewer">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        // Generate GitHub Contribution Graph
+        function generateContributionGraph() {
+            const grid = document.getElementById('contributionGrid');
+            if (!grid) return;
+            
+            // Create realistic pattern for 189 contributions spread across 2025
+            // More consistent activity with natural patterns (weekdays more active, some streaks, etc.)
+            const weeks = [
+                // Jan weeks 1-4 - New Year start, light activity
+                [0,0,0,0,1,0,0], [0,1,0,0,0,1,0], [0,0,1,0,0,0,0], [0,0,0,1,0,0,0],
+                
+                // Feb weeks 5-8 - Building momentum
+                [0,1,0,0,1,0,0], [0,0,0,1,0,1,0], [0,0,1,0,0,0,0], [0,1,0,0,0,0,0],
+                
+                // Mar weeks 9-13 - Consistent activity
+                [0,0,1,0,1,0,0], [0,1,2,0,0,1,0], [0,0,1,1,0,0,0], [0,1,0,0,2,0,0], [0,0,0,1,0,1,0],
+                
+                // Apr weeks 14-17 - Spring productivity
+                [0,0,1,0,0,0,0], [0,1,0,0,1,0,0], [0,0,0,1,0,2,0], [0,0,1,0,0,0,0],
+                
+                // May weeks 18-22 - Steady work
+                [0,1,0,1,0,0,0], [0,0,1,0,0,1,0], [0,0,0,0,1,0,0], [0,1,0,0,0,0,0], [0,0,1,0,1,0,0],
+                
+                // Jun weeks 23-26 - Summer activity
+                [0,0,0,1,0,0,0], [0,1,0,0,2,0,0], [0,0,1,0,0,1,0], [0,0,0,0,1,0,0],
+                
+                // Jul weeks 27-30 - Mid-year push
+                [0,1,0,1,0,0,0], [0,0,2,0,0,1,0], [0,0,0,1,0,0,0], [0,1,0,0,1,0,0],
+                
+                // Aug weeks 31-35 - High activity period
+                [0,0,1,0,2,0,0], [0,1,0,1,0,1,0], [0,0,2,0,0,0,0], [0,0,0,1,0,1,0], [0,1,0,0,1,0,0],
+                
+                // Sep weeks 36-39 - Back to work energy
+                [0,0,1,0,0,0,0], [0,1,0,2,0,1,0], [0,0,0,0,1,0,0], [0,0,1,0,0,0,0],
+                
+                // Oct weeks 40-44 - Autumn productivity
+                [0,1,0,0,0,1,0], [0,0,2,1,0,0,0], [0,0,1,0,1,0,0], [0,1,0,0,0,0,0], [0,0,0,1,0,1,0],
+                
+                // Nov weeks 45-48 - Year-end push
+                [0,0,1,0,0,0,0], [0,1,0,0,2,1,0], [0,0,0,1,0,0,0], [0,0,1,0,1,0,0],
+                
+                // Dec weeks 49-52 - Holiday season, lighter activity
+                [0,1,0,0,0,0,0], [0,0,0,1,0,0,0], [0,0,1,0,0,1,0], [0,0,0,0,1,0,0]
+            ];
+            
+            weeks.forEach(week => {
+                const weekDiv = document.createElement('div');
+                weekDiv.className = 'week';
+                
+                week.forEach(level => {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = `day level-${level}`;
+                    
+                    // Add realistic tooltips based on contribution level
+                    const tooltips = {
+                        0: 'No contributions',
+                        1: `${Math.floor(Math.random() * 3) + 1} contributions`,
+                        2: `${Math.floor(Math.random() * 4) + 4} contributions`,
+                        3: `${Math.floor(Math.random() * 4) + 8} contributions`,
+                        4: `${Math.floor(Math.random() * 8) + 12} contributions`
+                    };
+                    
+                    dayDiv.title = tooltips[level];
+                    weekDiv.appendChild(dayDiv);
+                });
+                
+                grid.appendChild(weekDiv);
+            });
+        }
+
+        // Resume Modal Functions
+        function openResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            const viewer = document.getElementById('resumeViewer');
+            const loading = document.getElementById('resumeLoading');
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Load PDF directly for better compatibility
+            if (!viewer.src) {
+                loading.style.display = 'flex';
+                viewer.style.display = 'none';
+                
+                // Use direct PDF loading
+                viewer.src = 'girish joshi (december).pdf';
+                
+                // Show viewer after a short delay
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    viewer.style.display = 'block';
+                }, 500);
+            } else {
+                loading.style.display = 'none';
+                viewer.style.display = 'block';
+            }
+        }
+
+        function closeResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function downloadResume() {
+            const resumeUrl = 'girish joshi (december).pdf';
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.download = 'Girish_Joshi_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('resumeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeResumeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeResumeModal();
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+                const targetId = this.getAttribute("href");
+                if (targetId === "#") return;
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for section animation
+        const observerOptions = {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll(".section").forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Header background on scroll
+        window.addEventListener("scroll", () => {
+            const header = document.querySelector(".header");
+            if (window.scrollY > 80) {
+                header.style.background = "rgba(2, 6, 23, 0.98)";
+                header.style.borderBottomColor = "rgba(15, 23, 42, 1)";
+            } else {
+                header.style.background = "rgba(2, 6, 23, 0.8)";
+                header.style.borderBottomColor = "rgba(15, 23, 42, 0.9)";
+            }
+        });
+
+        // Generate contribution graph when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            generateContributionGraph();
+        });
+    </script>
 </body>
 </html>
