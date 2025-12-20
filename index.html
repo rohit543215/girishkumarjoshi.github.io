@@ -226,8 +226,41 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-title span {
-            color: var(--accent-blue);
+        .hero-title .name-highlight {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+
+        .waving-hand {
+            display: inline-block;
+            animation: wave 2s ease-in-out infinite;
+            transform-origin: 70% 70%;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            40% { transform: rotate(14deg); }
+            50% { transform: rotate(-4deg); }
+            60% { transform: rotate(10deg); }
+            70% { transform: rotate(0deg); }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { 
+                background: linear-gradient(135deg, #60a5fa, #a78bfa, #22d3ee);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            50% { 
+                background: linear-gradient(135deg, #22d3ee, #60a5fa, #a78bfa);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
         }
 
         .hero-subtext {
@@ -1372,7 +1405,7 @@
                 Available For Work
             </div>
             <h1 class="hero-title">
-                I'm <span>Girish Joshi</span>! 👋
+                I'm <span class="name-highlight">Girish Joshi</span>! <span class="waving-hand">👋</span>
             </h1>
 
             <p class="hero-subtext">
