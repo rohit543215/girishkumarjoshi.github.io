@@ -494,6 +494,7 @@
             padding: 1.6rem 1.7rem;
             transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease,
                 background 0.2s ease;
+            position: relative;
         }
 
         .experience-card:hover {
@@ -501,6 +502,28 @@
             border-color: var(--accent-blue);
             box-shadow: 0 20px 45px rgba(15, 23, 42, 0.9);
             background: rgba(15, 23, 42, 0.95);
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-info {
+            flex: 1;
         }
 
         .experience-dot {
@@ -1022,6 +1045,18 @@
                 width: 100%;
                 margin-left: 35px;
                 padding: 1.2rem;
+            }
+
+            .company-logo {
+                width: 35px;
+                height: 35px;
+                background: rgba(255, 255, 255, 0.95);
+                padding: 5px;
+            }
+
+            .company-header {
+                gap: 0.8rem;
+                margin-bottom: 0.8rem;
             }
 
             .experience-dot {
@@ -1597,8 +1632,13 @@
                 <!-- Ozibook -->
                 <div class="experience-item">
                     <article class="experience-card">
-                        <div class="company-name">Ozibook – EdTech Platform</div>
-                        <div class="job-title">Data Analyst Intern</div>
+                        <div class="company-header">
+                            <img src="images/Screenshot 2025-12-24 114129.png" alt="Ozibook Logo" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">Ozibook – EdTech Platform</div>
+                                <div class="job-title">Data Analyst Intern</div>
+                            </div>
+                        </div>
                         <div class="job-duration">
                             <i class="fas fa-calendar"></i> Jun 2024 – Aug 2024 · Pune, India
                         </div>
@@ -1619,8 +1659,13 @@
                 <!-- Pustakwale -->
                 <div class="experience-item">
                     <article class="experience-card">
-                        <div class="company-name">Pustakwale – Book Retail</div>
-                        <div class="job-title">Sales &amp; Inventory Intern</div>
+                        <div class="company-header">
+                            <img src="images/Screenshot 2025-12-24 114005.png" alt="Pustakwale Logo" class="company-logo">
+                            <div class="company-info">
+                                <div class="company-name">Pustakwale – Book Retail</div>
+                                <div class="job-title">Sales &amp; Inventory Intern</div>
+                            </div>
+                        </div>
                         <div class="job-duration">
                             <i class="fas fa-calendar"></i> Jan 2023 – Dec 2023 · Pune, India
                         </div>
